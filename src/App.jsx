@@ -8,6 +8,9 @@ export default function App() {
 
   const [dice , SetDice] = useState(allNewDice())
   const [tenzies , setTenzies] = useState(false)
+  const [totaldiceRolls, setTotalDiceRolls] = useState(0)
+
+console.log(totaldiceRolls)
 
   function generateDie() {
     return { value : Math.ceil(Math.random() * 6) ,
@@ -51,7 +54,9 @@ export default function App() {
     if(tenzies) {
       setTenzies(false)
       SetDice(allNewDice())
+      setTotalDiceRolls(0)
     } else {
+      setTotalDiceRolls(oldTotal => oldTotal + 1)
       SetDice(oldDice => oldDice.map(die => {
         return die.isHeld ? 
           die : 
@@ -72,6 +77,7 @@ export default function App() {
       {tenzies && <Confetti />}
       <h1 className='main--heading'>Tenzies</h1>
       <p className='main--para'>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+      <h3 className='main--count'>Count: {totaldiceRolls}</h3>
       <div className="allDices">
         {diceElements}
       </div>

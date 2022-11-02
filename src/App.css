@@ -27,6 +27,11 @@
     color: #4A4E74;
 }
 
+.main--count {
+    margin-top: 0;
+    color: #2B283A;
+}
+
 .allDices {
     display: grid;
     grid-template-columns: repeat(5,1fr);
