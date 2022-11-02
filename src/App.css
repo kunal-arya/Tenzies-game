@@ -1,0 +1,77 @@
+
+
+
+.main {
+    height: 400px;
+    width: 400px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 10px 10px 10px -5px rgba(255, 255, 255, 0.15);
+}
+
+.main--heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #2B283A;
+}
+
+.main--para {
+    max-width: 300px;
+    text-align: center;
+    margin-top: 0;
+    color: #4A4E74;
+}
+
+.allDices {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    margin-bottom: 2em;
+    gap: 1.5em;
+}
+
+/* Single Die */
+
+.die--face {
+    height: 50px;
+    width: 50px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.die--value {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.selected {
+    background-color: #59E391;
+}
+
+/* button */
+
+.btn-primary {
+    width: 150px;
+    height: 50px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    background-color: #5035FF;
+    border-radius: 5px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+}
+
+.btn-primary:active {
+    box-shadow: inset 10px 10px 10px -3px rgba(0, 0, 0, 0.18);
+}
