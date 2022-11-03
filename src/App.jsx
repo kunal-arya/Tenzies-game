@@ -8,9 +8,44 @@ export default function App() {
 
   const [dice , SetDice] = useState(allNewDice())
   const [tenzies , setTenzies] = useState(false)
-  const [totaldiceRolls, setTotalDiceRolls] = useState(0)
+  const [seconds, setSeconds] = useState(0)
+  const [minutes, setMinutes] = useState(0)
+  const [bestTime, setBestTime] = useState(() => JSON.parse(localStorage.getItem("bestTime")) || 0)
+  let timer // timer for the clock 
 
-console.log(totaldiceRolls)
+  // setting the timer for the game
+  useEffect(() => {
+    timer = setInterval(() => {
+      setSeconds(seconds => seconds + 1)
+
+      if(seconds === 59) {
+        setMinutes(minutes => minutes + 1)
+        setSeconds(0)
+      }
+    },1000)
+
+    return () => {
+      clearInterval(timer)
+    }
+  })
+
+  // if game is won, updating the bestTime
+  useEffect(() => {
+    if(tenzies) {
+      let totalTime = seconds + 60 * minutes
+      if(bestTime == 0 || totalTime < bestTime) {
+        localStorage.setItem("bestTime",JSON.stringify(totalTime))
+        setBestTime(totalTime)
+      }
+    }
+  },[tenzies])
+
+  // stoping the timer 
+  useEffect(() => {
+    if(tenzies) {
+      clearInterval(timer)
+    }
+  })
 
   function generateDie() {
     return { value : Math.ceil(Math.random() * 6) ,
@@ -54,9 +89,9 @@ console.log(totaldiceRolls)
     if(tenzies) {
       setTenzies(false)
       SetDice(allNewDice())
-      setTotalDiceRolls(0)
+      setMinutes(0)
+      setSeconds(0)
     } else {
-      setTotalDiceRolls(oldTotal => oldTotal + 1)
       SetDice(oldDice => oldDice.map(die => {
         return die.isHeld ? 
           die : 
@@ -77,7 +112,10 @@ console.log(totaldiceRolls)
       {tenzies && <Confetti />}
       <h1 className='main--heading'>Tenzies</h1>
       <p className='main--para'>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-      <h3 className='main--count'>Count: {totaldiceRolls}</h3>
+      <div className="score-container">
+        {bestTime != 0 && <h3>Best Time: {bestTime < 10 ? `0${bestTime}` : bestTime} Sec</h3>}
+        <h3>Timer: {minutes < 10 ? `0${minutes}` : minutes} : {seconds < 10 ? `0${seconds}` : seconds}</h3>
+      </div>
       <div className="allDices">
         {diceElements}
       </div>

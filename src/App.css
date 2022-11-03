@@ -27,8 +27,13 @@
     color: #4A4E74;
 }
 
-.main--count {
+.score-container {
     margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 300px;
+    width: 100%;
     color: #2B283A;
 }
 
@@ -79,4 +84,49 @@
 
 .btn-primary:active {
     box-shadow: inset 10px 10px 10px -3px rgba(0, 0, 0, 0.18);
+}
+
+/* Media Queries */
+
+@media (max-width:425px) {
+    .main {
+        height: 300px;
+        width: 300px;
+    }
+
+    .main--heading {
+        font-size: 1.25rem;
+    }
+
+    .main--para {
+        max-width: 250px;
+        font-size: 0.5rem;
+    }
+
+    .score-container {
+        max-width: 225px;   
+    }
+
+    .score-container > *  {
+        font-size: 0.75rem;
+    }
+
+    .allDices {
+        gap: 1em;
+    }
+
+    .die--face {
+        height: 30px;
+        width: 30px;
+    }
+
+    .die--value {
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        width: 100px;
+        height: 30px;
+        font-size: 0.75rem;
+    }
 }
